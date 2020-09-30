@@ -1,0 +1,9 @@
+bucket:
+  strip: 1
+packages:
+  - name: bookmark
+    parameters:
+       config_password: ${CONFIG_PASSWORD}
+    actions:
+      - name: login
+        web: true
