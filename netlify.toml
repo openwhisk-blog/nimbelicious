@@ -1,0 +1,10 @@
+[[plugins]]
+package = "netlify-plugin-nimbella"
+
+[build]
+  base = "."
+  publish = "web"
+  command = "#"
+
+[nimbella]
+  path = "/api/"
