@@ -4,7 +4,7 @@ package = "netlify-plugin-nimbella"
 [build]
   base = "."
   publish = "web/public"
-  command = "nim project deploy ."
+  command = "cd web && npm install && npm run build"
 
 [nimbella]
   path = "/api/"
