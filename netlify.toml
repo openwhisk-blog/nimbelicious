@@ -3,8 +3,8 @@ package = "netlify-plugin-nimbella"
 
 [build]
   base = "."
-  publish = "web"
-  command = "#"
+  publish = "web/public"
+  command = "nim project deploy ."
 
 [nimbella]
   path = "/api/"
