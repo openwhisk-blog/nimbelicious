@@ -1,19 +1,23 @@
 import 'bulma/css/bulma.min.css';
 import App from './App.svelte';
 
+// calculate api server location 
 let apiserver = "apigcp.nimbella.io"
 let pos = location.hostname.indexOf(apiserver)
-let namespace = "micheles-3bjkqg0vpyb"
+let namespace = ""
 
 if(location.hostname == "localhost")  {
-	// do nothing
+	// development namespace - start slash required
+	namespace = "/micheles-3bjkqg0vpyb"
 } else if(pos != -1) {
-   namespace = location.hostname.substring(0,pos)
+   // nimbella deployment
+   namespace = "/" + location.hostname.substring(0,pos) 
 }  else {
-  // todo
+  // proxified deployment
+  apiserver = location.hostname
 }
 
-apiserver = "https://"+apiserver + "/api/v1/web/"+ namespace
+apiserver = "https://"+apiserver + "/api/v1/web"+ namespace
 console.log(apiserver)
 
 const app = new App({

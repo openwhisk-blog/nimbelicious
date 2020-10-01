@@ -22,7 +22,8 @@ async function login() {
 </script>
 
 <div class="container">
-    <h1 class="title">Personal Bookmark Manager</h1>
+    <h1 class="title">Nimbelicious</h1>
+    <h1 class="subtitle">Personal Bookmark Manager</h1>
     {#if error}
       <article class="message is-danger">
         <div class="message-header">
