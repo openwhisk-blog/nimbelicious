@@ -22,9 +22,17 @@ async function login() {
 </script>
 
 <div class="container">
-    <h1 class="title">
-    Personal Bookmark Manager
-    </h1>
+    <h1 class="title">Personal Bookmark Manager</h1>
+    {#if error}
+      <article class="message is-danger">
+        <div class="message-header">
+          <p>Error</p>
+        </div>
+        <div class="message-body">
+          {error}
+        </div>
+      </article>
+    {/if}
     <div class="field">
         <label for="password" class="label">Type your password</label>
         <div class="control">
@@ -36,14 +44,4 @@ async function login() {
             <button class="button" on:click={login}>Login</button>
         </div>
     </div>
-    {#if error}
-    <article class="message is-danger">
-        <div class="message-header">
-          <p>Error</p>
-        </div>
-        <div class="message-body">
-          {error}
-        </div>
-     </article>
-    {/if}
 </div>

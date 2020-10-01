@@ -1,92 +1,99 @@
 <script>
     export let api;
-    import { token } from './store.js'
-    import { tagCloud } from 'tag-cloud';
-    import { onMount } from 'svelte'
-  
-    let tags = [
-        {tagName: 'js', count: 5},
-        {tagName: 'css', count: 9},
-        {tagName: 'less', count: 13},
-        {tagName: 'rest', count: 2}
-    ];
+    let api1 = api; // temp
 
-    let cloud = ""
+    import { token, tag } from './store.js'
+    import { onMount } from 'svelte'
+    import WordCloud from 'wordcloud';
+  
+    let newTag;
+
+    let list = [
+          ['Michele', 10, 'http://google.com?q=foo'], 
+          ['Mirella', 8, 'http://google.com?q=bar'],
+          ['Laura',   8, 'http://google.com?q=bar'],
+          ['Massimo', 6, 'http://google.com?q=bar']
+    ]
+
     onMount(() => {
-        tagCloud(tags, (err, data) => {
-            if(err) console.log(err)
-            else cloud = data
-        }, {
-          classPrefix: "tag",
-          htmlTag: "a"
+        WordCloud(document.getElementById('canvas'), {
+            list: list, 
+            gridSize: 8,
+            weightFactor: 4,
+            origin: [400, 300],
+            fontFamily: 'Times, serif',
+            color: 'random-light',
+            backgroundColor: '#000',
+            shuffle: false,
+            rotateRatio: 0,
+            hover: function(item, rect) {
+                console.log(rect)
+                let marker = document.getElementById("marker")
+                if(rect) {
+                    marker.setAttribute("x", rect.x)
+                    marker.setAttribute("y", rect.y)
+                    marker.setAttribute("width", rect.w)
+                    marker.setAttribute("height", rect.h)
+                    marker.setAttribute("display", "true")
+                } else {
+                    marker.setAttribute("display", "none")
+                }
+            },
+            click: function(item) {
+                tag.set(item[0])
+            },
+            backgroundColor: '#001f00'
         })
     })
-    let api1 = api;
-</script>
 
-<h1>{$token}</h1>
+    function addTag() {
+        tag.set(newTag)
+    }
+
+
+</script>
 <div class="container">
-    {@html `<div class="tag">${cloud}</div>`}
+   <div id="tags">
+     <canvas width="600" height="400" id="canvas"></canvas>
+     <svg id="overlay">
+       <rect id="marker" x="0" y="0" width="600" height="400"
+          style="stroke: #009900;stroke-width: 3;fill: none;" />
+     </svg>
+   </div>
 </div>
+<div id="container">
+    <div class="field">
+        <label for="tag" class="label">New Tag</label>
+        <div class="control">
+            <input size="20" id="tag" class="input" type="text" placeholder="Tag" bind:value={newTag}>
+        </div>
+    </div>
+    <div class="field is-grouped">
+        <div class="control">
+            <button class="button" on:click={addTag}>Add Tag</button>
+        </div>       
+        <div class="control">
+            <button class="button" on:click={() => token.set("")}>Logout</button>
+        </div>
+    </div>
+</div>
+
 <style>
-.tag {
-    padding-top: 0.625em;
-    text-align: left;
-    display: table-cell;
-    vertical-align: top;
-    font-size: 100%;
+#tags {
+    width: 600px;
+    height: 400px;
+    position: relative;
 }
-.tag .tag0 {
-    color: #0748cb;
-    font-size: 0.875em;
+#canvas,
+#overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
-.tag .tag1 {
-    color: #e86e0b;
-    font-size: 0.9375em;
-}
-.tag .tag2 {
-    color: #d9b904;
-    font-size: 1em;
-}
-.tag .tag3 {
-    color: #574ece;
-    font-size: 1.0625em;
-}
-.tag .tag4 {
-    color: #47ac33;
-    font-size: 1.125em;
-}
-.tag .tag5 {
-    color: #3599cd;
-    font-size: 1.1875em;
-}
-.tag .tag6 {
-    color: #c3365a;
-    font-size: 1.25em;
-}
-.tag .tag7 {
-    color: #19838c;
-    font-size: 1.375em;
-}
-.tag .tag8 {
-    color: #a2a097;
-    font-size: 1.4375em;
-}
-.tag .tag9 {
-    color: #93a558;
-    font-size: 1.5em;
-}
-.tag a {
-    display: inline-block;
-    margin: .125em 0.75em .125em 0;
-    line-height: 1.2em;
-    word-break: break-all;
-    vertical-align: middle;
-}
-a:hover {
-    text-decoration: underline;
-}
-a {
-    text-decoration: none;
+#overlay {
+    z-index: 10;
+    pointer-events: none;
 }
 </style>
