@@ -4,6 +4,7 @@ packages:
   - name: bookmark
     parameters:
        config_password: ${NIMBELICIOUS_PASSWORD}
+       database_secret: ${FAUNADB_SERVER_SECRET}
     actions:
       - name: login
         web: true
