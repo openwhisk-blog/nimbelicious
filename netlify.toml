@@ -8,3 +8,6 @@ package = "netlify-plugin-nimbella"
 
 [nimbella]
   path = "/api/v1/web"
+
+[template.environment]
+  NIMBELICIOUS_PASSWORD = "changeMe!"
