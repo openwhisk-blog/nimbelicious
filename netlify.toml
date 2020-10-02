@@ -7,7 +7,7 @@ package = "netlify-plugin-nimbella"
   command = "cd web && npm install && npm run build"
 
 [nimbella]
-  path = "/api"
+  path = "/api/"
 
 [template.environment]
   NIMBELICIOUS_PASSWORD = "specify your password here"
