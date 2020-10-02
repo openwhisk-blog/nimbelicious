@@ -3,21 +3,25 @@ import App from './App.svelte';
 
 // calculate api server location 
 let apiserver = "apigcp.nimbella.io"
-let pos = location.hostname.indexOf(apiserver)
 let namespace = ""
+let path = "/api/v1/web"
+let pos = location.hostname.indexOf(apiserver)
 
 if(location.hostname == "localhost")  {
-	// development namespace - start slash required
-	namespace = "/micheles-3bjkqg0vpyb"
+  // development namespace 
+  // change this to your own for development 
+  // start slash is required
+	namespace = "/msciabar-zc3thebgxgh"
 } else if(pos != -1) {
    // nimbella deployment
    namespace = "/" + location.hostname.substring(0,pos) 
 }  else {
   // proxified deployment
   apiserver = location.hostname
+  path = "/api"
 }
 
-apiserver = "https://"+apiserver + "/api/v1/web"+ namespace
+apiserver = "https://"+ apiserver + path + namespace
 console.log(apiserver)
 
 const app = new App({

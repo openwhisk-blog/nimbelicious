@@ -6,6 +6,7 @@ let error = "";
 let data = {}
 
 async function login() {
+  try {
     let res = await fetch(api+"/bookmark/login", {
       method: 'POST',
       body: JSON.stringify(data),
@@ -18,6 +19,9 @@ async function login() {
     } else if(res.error) {
         error = res.error
     }
+  } catch(e) {
+    error = e
+  }
 }
 </script>
 
