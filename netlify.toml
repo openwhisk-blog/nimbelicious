@@ -11,4 +11,3 @@ package = "netlify-plugin-nimbella"
 
 [template.environment]
   NIMBELICIOUS_PASSWORD = "specify the password here"
-  NIMBELLA_LOGIN_TOKEN = " go to nimbella.com/signup, token is after 'nim auth login'"
