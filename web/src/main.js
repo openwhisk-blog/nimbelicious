@@ -14,7 +14,7 @@ if(location.hostname == "localhost")  {
 	namespace = "/msciabar-zc3thebgxgh"
 } else if(pos != -1) {
    // nimbella deployment
-   namespace = "/" + location.hostname.substring(0,pos) 
+   namespace = "/" + location.hostname.substring(0,pos-1) 
 }  else {
   // proxified deployment
   apiserver = location.hostname

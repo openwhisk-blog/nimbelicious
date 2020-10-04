@@ -4,7 +4,7 @@ export TOKEN=xxx
 
 # development
 function invoke { 
-    nim action invoke "$@" 
+    nim action invoke "$@" | jq .body
 }
 # test function
 function invoke {
@@ -12,6 +12,13 @@ function invoke {
     nim action invoke "$@" | jq .body | tee -a test.out
 }
 rm test.out
+export TOKEN=$(nim action invoke bookmark/login -p password $PASSWORD | jq -r .body.token)
+
+# login
+invoke bookmark/login
+invoke bookmark/login -p password badpass
+invoke bookmark/login -p token badpass
+invoke bookmark/login -p token $TOKEN
 
 # unauthorized
 invoke bookmark/del
@@ -23,8 +30,7 @@ invoke bookmark/tag -p token xxx
 invoke bookmark/tags
 invoke bookmark/tags -p token xxx
 
-# login
-export TOKEN=$(nim action invoke bookmark/login -p password $PASSWORD | jq -r .body.token)
+
 invoke bookmark/del -p token $TOKEN -p yes_really_remove_all 1 
 
 # test
