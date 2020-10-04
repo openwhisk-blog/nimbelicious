@@ -1,6 +1,9 @@
 [[plugins]]
 package = "netlify-plugin-nimbella"
 
+[nimbella]
+# workaround
+
 [build]
   base = "."
   publish = "web/public"
