@@ -1,4 +1,7 @@
+.nimbella/
+.netlify/
 node_modules/
-
-# Local Netlify folder
-.netlify
+__pycache__/
+attic/
+*.orig
+*.out

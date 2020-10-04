@@ -3,7 +3,7 @@ bucket:
 packages:
   - name: bookmark
     parameters:
-       config_password: ${NIMBELICIOUS_PASSWORD}
+       nimbelicious_password: ${NIMBELICIOUS_PASSWORD}
     actions:
       - name: login
         web: true

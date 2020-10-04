@@ -1,7 +1,6 @@
 <script>
     export let api;
-    let api1 = api; // temp
-
+    
     import { token, tag } from './store.js'
     import { onMount } from 'svelte'
     import WordCloud from 'wordcloud';
@@ -9,47 +8,50 @@
     let newTag;
 
     let list = [
-          ['Michele', 10, 'http://google.com?q=foo'], 
-          ['Mirella', 8, 'http://google.com?q=bar'],
-          ['Laura',   8, 'http://google.com?q=bar'],
-          ['Massimo', 6, 'http://google.com?q=bar']
+          ['Michele', 10], 
+          ['Mirella', 8],
+          ['Laura',   8],
+          ['Massimo', 6]
     ]
 
-    onMount(() => {
+    function hoverTag(item, rect) {
+        console.log(rect)
+        let marker = document.getElementById("marker")
+        if(rect) {
+            marker.setAttribute("x", rect.x)
+            marker.setAttribute("y", rect.y)
+            marker.setAttribute("width", rect.w)
+            marker.setAttribute("height", rect.h)
+            marker.setAttribute("display", "true")
+        } else {
+            marker.setAttribute("display", "none")
+        }
+    }
+
+    function wordCloud(list) {
         WordCloud(document.getElementById('canvas'), {
             list: list, 
             gridSize: 8,
-            weightFactor: 4,
-            origin: [400, 300],
+            weightFactor: 12,
+            origin: [300, 200],
             fontFamily: 'Times, serif',
             color: 'random-light',
             backgroundColor: '#000',
             shuffle: false,
             rotateRatio: 0,
-            hover: function(item, rect) {
-                console.log(rect)
-                let marker = document.getElementById("marker")
-                if(rect) {
-                    marker.setAttribute("x", rect.x)
-                    marker.setAttribute("y", rect.y)
-                    marker.setAttribute("width", rect.w)
-                    marker.setAttribute("height", rect.h)
-                    marker.setAttribute("display", "true")
-                } else {
-                    marker.setAttribute("display", "none")
-                }
-            },
+            hover: hoverTag,
             click: function(item) {
                 tag.set(item[0])
-            },
-            backgroundColor: '#001f00'
+            }
         })
-    })
-
-    function addTag() {
-        tag.set(newTag)
     }
 
+    onMount(async () => {
+        let res = await fetch(api+"/bookmark/tags?token="+$token)
+        res = await res.json()
+        console.log(res)
+        wordCloud(res.tags)
+    })
 
 </script>
 <div class="container">
@@ -70,7 +72,7 @@
     </div>
     <div class="field is-grouped">
         <div class="control">
-            <button class="button" on:click={addTag}>Add Tag</button>
+            <button class="button" on:click={() => tag.set(newTag)}>Add Tag</button>
         </div>       
         <div class="control">
             <button class="button" on:click={() => token.set("")}>Logout</button>

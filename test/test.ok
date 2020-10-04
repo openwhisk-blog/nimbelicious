@@ -1,0 +1,207 @@
+# bookmark/del
+{
+  "error": "unauthorized"
+}
+# bookmark/del -p token xxx
+{
+  "error": "unauthorized"
+}
+# bookmark/add
+{
+  "error": "unauthorized"
+}
+# bookmark/add -p token xxx
+{
+  "error": "unauthorized"
+}
+# bookmark/tag
+{
+  "error": "unauthorized"
+}
+# bookmark/tag -p token xxx
+{
+  "error": "unauthorized"
+}
+# bookmark/tags
+{
+  "error": "unauthorized"
+}
+# bookmark/tags -p token xxx
+{
+  "error": "unauthorized"
+}
+# bookmark/del -p token xxx -p yes_really_remove_all 1
+{
+  "error": "nothing to do"
+}
+# bookmark/tags -p token xxx
+{
+  "tags": []
+}
+# bookmark/tag -p token xxx -p tag search
+{
+  "search": []
+}
+# bookmark/add -p token xxx -p tag search -p url http://www.google.com
+{
+  "add": 1
+}
+# bookmark/tag -p token xxx -p tag search
+{
+  "search": [
+    "http://www.google.com"
+  ]
+}
+# bookmark/add -p token xxx -p tag search -p url http://www.duckduckgo.com
+{
+  "add": 2
+}
+# bookmark/tags -p token xxx
+{
+  "tags": [
+    [
+      "search",
+      2
+    ]
+  ]
+}
+# bookmark/tag -p token xxx -p tag search
+{
+  "search": [
+    "http://www.duckduckgo.com",
+    "http://www.google.com"
+  ]
+}
+# bookmark/add -p token xxx -p tag social -p url http://www.facebook.com
+{
+  "add": 1
+}
+# bookmark/tags -p token xxx
+{
+  "tags": [
+    [
+      "search",
+      2
+    ],
+    [
+      "social",
+      1
+    ]
+  ]
+}
+# bookmark/add -p token xxx -p tag social -p url http://www.linkedin.com
+{
+  "add": 2
+}
+# bookmark/tag -p token xxx -p tag social
+{
+  "social": [
+    "http://www.linkedin.com",
+    "http://www.facebook.com"
+  ]
+}
+# bookmark/tag -p token xxx -p tag search -p url http://www.google.com
+{
+  "search": [
+    "http://www.duckduckgo.com",
+    "http://www.google.com"
+  ]
+}
+# bookmark/tags -p token xxx
+{
+  "tags": [
+    [
+      "search",
+      2
+    ],
+    [
+      "social",
+      2
+    ]
+  ]
+}
+# bookmark/tag -p token xxx -p tag social
+{
+  "social": [
+    "http://www.linkedin.com",
+    "http://www.facebook.com"
+  ]
+}
+# bookmark/tag -p token xxx -p tag search
+{
+  "search": [
+    "http://www.duckduckgo.com",
+    "http://www.google.com"
+  ]
+}
+# bookmark/del -p token xxx -p tag search -p url http://www.google.com
+{
+  "del": 1,
+  "tag": "search",
+  "url": "http://www.google.com"
+}
+# bookmark/tags -p token xxx
+{
+  "tags": [
+    [
+      "search",
+      1
+    ],
+    [
+      "social",
+      2
+    ]
+  ]
+}
+# bookmark/del -p token xxx -p tag social -p url http://www.linkedin.com
+{
+  "del": 1,
+  "tag": "social",
+  "url": "http://www.linkedin.com"
+}
+# bookmark/tags -p token xxx
+{
+  "tags": [
+    [
+      "search",
+      1
+    ],
+    [
+      "social",
+      1
+    ]
+  ]
+}
+# bookmark/tag -p token xxx -p tag social
+{
+  "social": [
+    "http://www.facebook.com"
+  ]
+}
+# bookmark/del -p token xxx -p tag social
+{
+  "del": 1,
+  "tags": [
+    "social"
+  ]
+}
+# bookmark/tags -p token xxx
+{
+  "tags": [
+    [
+      "search",
+      1
+    ]
+  ]
+}
+# bookmark/del -p token xxx -p tag search
+{
+  "del": 1,
+  "tags": [
+    "search"
+  ]
+}
+# bookmark/tags -p token xxx
+{
+  "tags": []
+}
