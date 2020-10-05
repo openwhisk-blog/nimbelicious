@@ -1,19 +1,16 @@
 {
   "name": "nimbelicious",
   "version": "0.0.1",
-  "description": "A Personal Delicious clone with Nimbella+Netlify+FaunaDB",
+  "description": "A Personal Delicious clone with Nimbella+Netlify",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/openwhisk-blog/nimbeliciuous.git"
   },
-  "author": "Michele Sciabarra",
+  "author": "Michele Sciabarra <michele@sciabarra.com>",
   "license": "MIT",
   "homepage": "https://github.com/openwhisk-blog/nimbeliciuous",
   "devDependencies": {
-    "netlify-plugin-nimbella": "1.5.0"
+    "netlify-plugin-nimbella": "^1.5.0"
   }
 }

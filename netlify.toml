@@ -1,9 +1,6 @@
 [[plugins]]
 package = "netlify-plugin-nimbella"
 
-[nimbella]
-path = "/api/"
-
 [build]
   base = "."
   publish = "web/public"
@@ -11,3 +8,7 @@ path = "/api/"
 
 [template.environment]
   NIMBELICIOUS_PASSWORD = "specify the password here"
+
+[nimbella]
+  path = "/api/"
+
