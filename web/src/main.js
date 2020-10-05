@@ -18,7 +18,7 @@ if(location.hostname == "localhost")  {
 }  else {
   // proxified deployment
   apiserver = location.hostname
-  path = "/.netlify/nimbella"
+  path = "/api"
 }
 
 apiserver = "https://"+ apiserver + path + namespace

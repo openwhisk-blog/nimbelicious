@@ -2,7 +2,7 @@
 package = "netlify-plugin-nimbella"
 
 [nimbella]
-# workaround
+path = "/api/"
 
 [build]
   base = "."
