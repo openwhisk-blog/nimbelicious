@@ -4,4 +4,4 @@
 
 A Personal Delicious clone with Nimbella+Netlify
 
-![Deployment Instructions](https://openwhisk.blog/post/tech/fullstack-serverless/)
+[Deployment Instructions](https://openwhisk.blog/post/tech/fullstack-serverless/)
