@@ -1,5 +1,5 @@
 <script>
-    import { token, tag } from './store.js'
+    import { token, tag, url } from './store.js'
     import { onMount } from 'svelte'
     export let api;
 
@@ -17,30 +17,41 @@
             tag: $tag,
             url: url
         }
-        await fetch(api+"/bookmark/"+op, {
+        return fetch(api+"/bookmark/"+op, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(val)
-        })
-        load()
+        }).then(load)   
     }
 
-    function delURL() {
+    function del() {
       if(select < 0) {
        alert("Please select URL to delete")
        return
       }
-      edit("del", URLs[select])
+      return edit("del", URLs[select])
     }
 
     async function load() {
-        let res = await fetch(api+"/bookmark/tag?token="+$token+"&tag="+encodeURI($tag))
-        res = await res.json()
-        URLs = res[$tag]
-        console.log(URLs)
+        return fetch(api+"/bookmark/tag?token="+$token+"&tag="+encodeURI($tag))
+        .then((res) => res.json())
+        .then((res) => URLs = res[$tag] )
     }
 
-    onMount(load)
+    async function save(theURL) {
+      edit("add", theURL)
+      .then(() => {
+        url.set("")
+        location.href = theURL
+      })
+    }
+
+    onMount(() => {
+      if($url=="") 
+        load()
+      else
+        save($url)
+    })
 </script>
 
 <div id="container">
@@ -75,7 +86,7 @@
             <button class="button" on:click={() => { edit("add", newURL) ; newURL=""}}>Add URL</button>
         </div>
         <div class="control">
-          <button class="button" on:click={delURL}>Delete URL</button>
+          <button class="button" on:click={del}>Delete URL</button>
         </div>
         <div class="control">
             <button class="button" on:click={() => tag.set("")}>Tags</button>

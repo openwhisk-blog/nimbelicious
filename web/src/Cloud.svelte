@@ -1,18 +1,11 @@
 <script>
     export let api;
     
-    import { token, tag } from './store.js'
+    import { token, tag, url } from './store.js'
     import { onMount } from 'svelte'
     import WordCloud from 'wordcloud';
   
     let newTag;
-
-    let list = [
-          ['Michele', 10], 
-          ['Mirella', 8],
-          ['Laura',   8],
-          ['Massimo', 6]
-    ]
 
     function hoverTag(item, rect) {
         console.log(rect)
@@ -53,8 +46,14 @@
         wordCloud(res.tags)
     })
 
+    let me = location.href.split("?").shift()+"?"+$token
+    let save = `javascript:location.href='${me};'+encodeURI(location.href)`
+
 </script>
 <div class="container">
+   {#if $url}
+    <h2 class="subtitle"><tt>{$url}</tt></h2>
+   {/if}
    <div id="tags">
      <canvas width="600" height="400" id="canvas"></canvas>
      <svg id="overlay">
@@ -77,6 +76,9 @@
         <div class="control">
             <button class="button" on:click={() => token.set("")}>Logout</button>
         </div>
+    </div>
+    <div>
+        <b>Bookmarklets:</b> <a href={me}>Nimbelicious</a> - <a href={save}>Save to Nimbelicious</a>
     </div>
 </div>
 
